@@ -1,10 +1,9 @@
-import { Button, Container, Text, Title, Modal, TextInput, Group, Card, ActionIcon, Code, } from '@mantine/core';
+import { Button, Container, Text, Title, Modal, TextInput, Group, Card, ActionIcon } from '@mantine/core';
 import { useState, useRef, useEffect } from 'react';
 import { MoonStars, Sun, Trash } from 'tabler-icons-react';
 import { MantineProvider, ColorSchemeProvider, ColorScheme,} from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
-import { useHotKeys, useLocalStorage } from '@mantine/hooks';
-
+import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 
 export default function App() {
     const [tasks, setTasks] = useState([]);
@@ -20,7 +19,7 @@ export default function App() {
     const toggleColorScheme = value => 
             setColorScheme(value || (ColorScheme === 'dark' ? 'light' : 'dark'));
 
-    useHotKeys([['mod+J', () => toggleColorScheme()]]);
+    useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
 
     const taskTitle = useRef('');
@@ -81,10 +80,10 @@ export default function App() {
 
     return (
 		<ColorSchemeProvider
-			colorScheme={colorScheme}
+			colorScheme={ColorScheme}
 			toggleColorScheme={toggleColorScheme}>
 			<MantineProvider
-				theme={{ colorScheme, defaultRadius: 'md' }}
+				theme={{ ColorScheme, defaultRadius: 'md' }}
 				withGlobalStyles
 				withNormalizeCSS>
 				<div className='App'>
@@ -140,7 +139,7 @@ export default function App() {
 								color={'blue'}
 								onClick={() => toggleColorScheme()}
 								size='lg'>
-								{colorScheme === 'dark' ? (
+								{ColorScheme === 'dark' ? (
 									<Sun size={16} />
 								) : (
 									<MoonStars size={16} />
